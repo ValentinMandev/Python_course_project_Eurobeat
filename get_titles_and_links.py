@@ -23,7 +23,8 @@
 with open('all_songs.txt') as outfile:
 	for line in outfile:
 		if line != '[<div class="mmids">\n' and line != '</div>]\n' and line != '</p>\n':
-			print(line)
-
+			txt = str(line).replace('</a><br/>', '').replace('<br/>', '').replace('&amp;', '').replace('<b>#:</b><p align="left">', '')
+			if '<b>' not in txt:
+				print(txt)
 
 
