@@ -24,7 +24,7 @@ all_lyrics_index = ['https://www.eurobeat-prime.com/lyrics.php?artist=1']
 prices = urllib.request.urlopen('https://www.eurobeat-prime.com/lyrics.php?artist=d')
 soup = BeautifulSoup(prices)
 price = soup.findAll("div", class_="mmids")
-print(prices)
+print(price)
 
 # for price in prices:
 #     price_parent = price.parent
