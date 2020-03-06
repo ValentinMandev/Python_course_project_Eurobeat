@@ -1,30 +1,29 @@
 from bs4 import BeautifulSoup
 import urllib.request
 
-# Creating the list with artist name index and adding the first page:
+# Създаваме списък, който ще държи всички страници (за всяка една буква, с която започва името на изпълнителя):
+# Първият елемент е за тези, чийто псевдоним започва с число
 all_lyrics_index = ['https://www.eurobeat-prime.com/lyrics.php?artist=1']
 
 
-# Filling the list with the rest of the pages (letters from A to Z)
+# Допълваме листа с буквите от A до Z
 for letter in range(ord('a'), ord('z') + 1):
     all_lyrics_index.append(f'https://www.eurobeat-prime.com/lyrics.php?artist={chr(letter)}')
 
 
-# Getting a file with all available songs plus links for lyrics:
-lines_in_file = 1
+# Минаваме през всички страници и записваме файл с имена и линкове за всички песни:
 with open('all_songs.txt', 'w') as outfile:
     for page in all_lyrics_index:
         html_page = urllib.request.urlopen(page)
         soup = BeautifulSoup(html_page)
         print(soup.findAll("div", class_="mmids"), file=outfile)
-        lines_in_file += 1
 
 
-# Обработка на файла - премахваме излишни неща, пълним отделни променливи за име на изпълнител, име на песен, линк и
+# Обработка на информацията от файла - премахваме излишни неща, пълним отделни променливи за име на изпълнител, име на песен, линк и
 # ID (което взимаме от ID-то от линка с текста на песента).
 # Пълним списък от списъци с необходимата ни информация
-artist_song_list = [[] for _ in range(10000)]
-line_number = 0
+artist_song_list = [[] for _ in range(10000)] # тук дефинирам някаква голяма бройка списъци съдържащи се в основния списък, за да съм сигурен, че няма да ми даде out of range. Списъка на песни е повече от два пъти по-малко.
+line_number = 0 # това го ползвам, за да управлявам кой по ред списък част от основния списък да пълни
 with open('all_songs.txt') as outfile:
     for line in outfile:
         if line != '[<div class="mmids">\n' and line != '</div>]\n' and line != '</p>\n': # изключва излишни редове
