@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import urllib.request
+import os
 
 # Създаваме списък, който ще държи всички страници (за всяка една буква, с която започва името на изпълнителя):
 # Първият елемент е за тези, чийто псевдоним започва с число
@@ -24,8 +25,8 @@ with open('all_songs.txt', 'w') as outfile:
 # Пълним списък от списъци с необходимата ни информация
 artist_song_list = [[] for _ in range(10000)] # тук дефинирам някаква голяма бройка списъци съдържащи се в основния списък, за да съм сигурен, че няма да ми даде out of range. Списъка на песни е повече от два пъти по-малко.
 line_number = 0 # това го ползвам, за да управлявам кой по ред списък част от основния списък да пълни
-with open('all_songs.txt') as outfile:
-    for line in outfile:
+with open('all_songs.txt') as input_file:
+    for line in input_file:
         if line != '[<div class="mmids">\n' and line != '</div>]\n' and line != '</p>\n': # изключва излишни редове
             txt = str(line).replace('</a><br/>', '').replace('<br/>', '').replace('&amp;', '&').replace('<b>#:</b><p align="left">', '') # премахва ненужните html елементи
             if '<b>' not in txt:
@@ -39,5 +40,11 @@ with open('all_songs.txt') as outfile:
                 artist_song_list[line_number].append(lyrics_link)
                 line_number += 1
 
+with open('songs_available.csv', 'w') as output_file:
+    for songs in range(len(artist_song_list)):
+        if artist_song_list[songs]:
+            print(artist_song_list[songs][0] + ',' + artist_song_list[songs][1] + ',' + artist_song_list[songs][2], file=output_file)
+
+os.remove("all_songs.txt")
 
 
