@@ -60,4 +60,5 @@ with open('songs_available.txt', 'w') as output_file:
 # Изтривам ненужния all_songs.txt
 os.remove("all_songs.txt")
 
-
+# my google drive api key: AIzaSyBpFGQLqAVV1XOIsJWV8-Bk4D8ZOPIPgeo
+# https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html
