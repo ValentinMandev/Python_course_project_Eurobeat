@@ -34,12 +34,11 @@ with open('all_songs.txt') as outfile:
                 artist_name = txt[:txt.index(' - <a href="?lyrics=')]
                 song_name = txt[len(txt) - txt[::-1].index('>'):].replace('\n', '')
                 lyrics_link = 'https://www.eurobeat-prime.com/lyrics.php?lyrics=' + song_id
-                artist_song_list[line_number] = list()
                 artist_song_list[line_number].append(song_id)
                 artist_song_list[line_number].append(artist_name)
                 artist_song_list[line_number].append(song_name)
                 artist_song_list[line_number].append(lyrics_link)
                 line_number += 1
 
-print(artist_song_list)
+
 
