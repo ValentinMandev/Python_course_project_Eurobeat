@@ -40,6 +40,7 @@ with open('all_songs.txt') as input_file:
                 artist_song_list[line_number].append(lyrics_link)
                 line_number += 1
 
+
 with open('songs_available.txt', 'w') as output_file:
     for songs in range(len(artist_song_list)):
         if artist_song_list[songs]:
