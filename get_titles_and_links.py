@@ -40,10 +40,10 @@ with open('all_songs.txt') as input_file:
                 artist_song_list[line_number].append(lyrics_link)
                 line_number += 1
 
-with open('songs_available.csv', 'w') as output_file:
+with open('songs_available.txt', 'w') as output_file:
     for songs in range(len(artist_song_list)):
         if artist_song_list[songs]:
-            print(artist_song_list[songs][0] + ',' + artist_song_list[songs][1] + ',' + artist_song_list[songs][2], file=output_file)
+            print(artist_song_list[songs][0] + ': "' + str(artist_song_list[songs][1]).replace(':', '-') + ' - ' + str(artist_song_list[songs][2]).replace(':', '-') + '"', file=output_file)
 
 os.remove("all_songs.txt")
 
