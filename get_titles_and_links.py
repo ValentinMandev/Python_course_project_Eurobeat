@@ -35,6 +35,7 @@ with open('all_songs.txt') as input_file:
                 artist_name = txt[:txt.index(' - <a href="?lyrics=')]
                 song_name = txt[len(txt) - txt[::-1].index('>'):].replace('\n', '')
                 lyrics_link = 'https://www.eurobeat-prime.com/lyrics.php?lyrics=' + song_id
+                artist_song_list_raw[line_number].append(str(artist_name) + ' - ' + str(song_name))
                 artist_song_list_raw[line_number].append(song_id)
                 artist_song_list_raw[line_number].append(artist_name)
                 artist_song_list_raw[line_number].append(song_name)
@@ -50,15 +51,13 @@ for lst in range(len(artist_song_list_raw)):
         artist_song_list.append(artist_song_list_raw[lst])
 
 
-# Записвам си един файл с всички песни.
-with open('songs_available.txt', 'w') as output_file:
-    for songs in range(len(artist_song_list)):
-        if artist_song_list[songs]:
-            print(artist_song_list[songs][0] + ': "' + str(artist_song_list[songs][1]).replace(':', '-') + ' - ' + str(artist_song_list[songs][2]).replace(':', '-') + '"', file=output_file)
+# # Записвам си един файл с всички песни.
+# with open('songs_available.txt', 'w') as output_file:
+#     for songs in range(len(artist_song_list)):
+#         if artist_song_list[songs]:
+#             print(artist_song_list[songs][1] + ': ' + str(artist_song_list[songs][0]).replace(':', '-'), file=output_file)
 
 
 # Изтривам ненужния all_songs.txt
 os.remove("all_songs.txt")
 
-# my google drive api key: AIzaSyBpFGQLqAVV1XOIsJWV8-Bk4D8ZOPIPgeo
-# https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html
