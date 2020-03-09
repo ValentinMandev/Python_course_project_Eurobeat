@@ -11,16 +11,22 @@ query = connector.execute('SELECT * from all_songs')
 cols = [column[0] for column in query.description]
 results = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
 
-# search_field = input('Search for a song, artist, year or label ')
-#
-# for songs in range(len(results['song_name'])):
-#     s = re.compile(search_field, re.I)
-#     if s.search(results['song_name'][songs]) or s.search(results['artist_name'][songs]) or s.search(str(results['release_year'][songs])) or s.search(results['label'][songs]):
-#         print(results['artist_name'][songs], '-', results['song_name'][songs], f"{'(' + str(results['release_year'][songs]) + ')' if results['release_year'][songs] is not None and results['release_year'][songs] is not '' else ''}")
+search_field = input('Search for a song, artist, year or label ')
 
-# Всеки мач да има ID, да се пълни речник с ID-та и песни, избираме ID и по него дава информация
+s_songs = dict()
+c = 1
+for songs in range(len(results['song_name'])):
+    s = re.compile(search_field, re.I)
+    if s.search(results['song_name'][songs]) or s.search(results['artist_name'][songs]) or s.search(str(results['release_year'][songs])) or s.search(results['label'][songs]):
+        s_songs[c] = (results['artist_name'][songs] + ' - ' + results['song_name'][songs] + f"{'(' + str(results['release_year'][songs]) + ')' if results['release_year'][songs] is not None and results['release_year'][songs] is not '' else ''}", results['song_id'][songs])
+        c += 1
 
-song_id = 69
+for found in s_songs:
+    print(f'{found}: {s_songs[found][0]}')
+choice = int(input('Your choice: '))
+
+
+song_id = s_songs[choice][1]
 with open('temporary_lyrics_file.txt', 'w') as tempfile:
     lyrics_page = urllib.request.urlopen(f'https://www.eurobeat-prime.com/lyrics.php?lyrics={song_id}')
     soup = BeautifulSoup(lyrics_page, 'html.parser')
