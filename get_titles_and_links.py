@@ -17,7 +17,7 @@ for letter in range(ord('a'), ord('z') + 1):
 with open('all_songs.txt', 'w') as outfile:
     for page in all_lyrics_index:
         html_page = urllib.request.urlopen(page)
-        soup = BeautifulSoup(html_page)
+        soup = BeautifulSoup(html_page, 'html.parser')
         print(soup.findAll("div", class_="mmids"), file=outfile)
 
 
