@@ -17,7 +17,7 @@ s_songs = dict()
 c = 1
 for songs in range(len(results['song_name'])):
     s = re.compile(search_field, re.I)
-    if s.search(results['song_name'][songs]) or s.search(results['artist_name'][songs]) or s.search(str(results['release_year'][songs])) or s.search(results['label'][songs]):
+    if s.search(results['song_name'][songs]) or s.search(results['artist_name'][songs]) or s.search(str(results['release_year'][songs])) or s.search(results['label'][songs]) or s.search(results['artist_name'][songs] + ' ' + results['song_name'][songs]) or s.search(results['artist_name'][songs] + ' - ' + results['song_name'][songs]):
         s_songs[c] = (results['artist_name'][songs] + ' - ' + results['song_name'][songs] + f"{'(' + str(results['release_year'][songs]) + ')' if results['release_year'][songs] is not None and results['release_year'][songs] is not '' else ''}", results['song_id'][songs])
         c += 1
 
@@ -54,4 +54,3 @@ for songs in range(len(results['song_id'])):
         print(f"YouTube search link: {results['youtube_search_link'][songs]}")
         if results['duration'][songs] is not None: print(f"Song duration: {results['duration'][songs]}")
         if song_id < 100000: print(f"Lyrics:\n{txt[end_title_index:]}")
-
