@@ -21,8 +21,14 @@ for songs in range(len(results['song_name'])):
         s_songs[c] = (results['artist_name'][songs] + ' - ' + results['song_name'][songs] + f"{'(' + str(results['release_year'][songs]) + ')' if results['release_year'][songs] is not None and results['release_year'][songs] is not '' else ''}", results['song_id'][songs])
         c += 1
 
+any_songs = False
 for found in s_songs:
     print(f'{found}: {s_songs[found][0]}')
+    any_songs = True
+
+if any_songs is False:
+    exit('Sorry, no songs matching your query!')
+
 choice = int(input('Your choice: '))
 
 
@@ -48,9 +54,4 @@ for songs in range(len(results['song_id'])):
         print(f"YouTube search link: {results['youtube_search_link'][songs]}")
         if results['duration'][songs] is not None: print(f"Song duration: {results['duration'][songs]}")
         if song_id < 100000: print(f"Lyrics:\n{txt[end_title_index:]}")
-
-
-
-
-
 
