@@ -8,6 +8,8 @@ import tkinter as tk
 def search(entry):
 	print(entry.widget.get())
 
+def click(_):
+	print('Click')
 
 # създавам прозорец
 window = tk.Tk()
@@ -33,7 +35,7 @@ button = tk.Button(
     fg="yellow",
 )
 button.pack()
-
+button.bind('<Button-1>', click)
 
 
 entry = tk.Entry(fg="yellow", bg="green", width=50)
@@ -41,8 +43,6 @@ entry = tk.Entry(fg="yellow", bg="green", width=50)
 # Deleting text with .delete()
 # Inserting text with .insert()
 entry.pack()
-entry.bind('<Return>', search)
-
 
 
 
