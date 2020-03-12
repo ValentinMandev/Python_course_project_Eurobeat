@@ -10,6 +10,7 @@
 # https://likegeeks.com/python-gui-examples-tkinter-tutorial/
 
 import tkinter as tk
+import webbrowser
 
 
 def search(entry):
@@ -19,6 +20,8 @@ def search(entry):
 def click(_):
 	print('Click')
 
+def url():
+    url=webbrowser.open_new("www.pythonlake.com")
 
 # създавам прозорец
 window = tk.Tk()
@@ -30,24 +33,25 @@ label1 = tk.Label(
     text="EURO",
     fg="blue",
     bg="yellow",
-    width=10,
+    width=14,
     height=2,
-	font = 'Verdana 40 bold italic'
+	font = 'Verdana 55 bold italic'
 )
+
 
 label2 = tk.Label(
     text="BEAT",
-    fg="blue",
+    fg="red",
     bg="yellow",
-    width=10,
+    width=14,
     height=2,
-	font = 'Verdana 40 bold italic'
+	font = 'Verdana 55 bold italic'
 )
 
 
-label1.place(x=1, y=1)
-label2.place(x=600, y=1)
 
+label2.place(x=512, y=1)
+label1.place(x=1, y=1)
 
 # бутон
 button = tk.Button(
@@ -60,6 +64,8 @@ button = tk.Button(
 button.pack()
 button.bind('<Button-1>', click)
 
+button=tk.Button(window, text="pythonlake.com", command=url)
+button.pack()
 
 entry = tk.Entry(fg="yellow", bg="green", width=50)
 # Retrieving text with .get()
@@ -69,5 +75,3 @@ entry.pack()
 entry.bind('<Return>', search)
 
 window.mainloop()
-
-
