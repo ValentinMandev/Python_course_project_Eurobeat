@@ -4,8 +4,14 @@
 
 import tkinter as tk
 
+
+def search(entry):
+	print(entry.widget.get())
+
+
 # създавам прозорец
 window = tk.Tk()
+
 
 # някакъв лейбъл
 label = tk.Label(
@@ -17,6 +23,7 @@ label = tk.Label(
 )
 label.pack()
 
+
 # бутон
 button = tk.Button(
     text="Click me!",
@@ -27,29 +34,21 @@ button = tk.Button(
 )
 button.pack()
 
+
+
 entry = tk.Entry(fg="yellow", bg="green", width=50)
 # Retrieving text with .get()
 # Deleting text with .delete()
 # Inserting text with .insert()
 entry.pack()
+entry.bind('<Return>', search)
 
-entry.bind('<Return>', search_field = entry.get())
+
+
+
+
+
 
 window.mainloop()
 
 
-
-# import tkinter as tk
-#
-#
-# def on_change(e):
-#     print(e.widget.get())
-#
-# root = tk.Tk()
-#
-# e = tk.Entry(root)
-# e.pack()
-# # Calling on_change when you press the return key
-# e.bind("<Return>", on_change)
-#
-# root.mainloop()
