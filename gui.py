@@ -14,11 +14,11 @@ import webbrowser
 
 
 def search(entry):
-	search_field = entry.widget.get()
-	print(search_field)
+    search_field = entry.widget.get()
+    print(search_field)
 
 def click(_):
-	print('Click')
+    print('Click')
 
 def url():
     url=webbrowser.open_new("www.pythonlake.com")
@@ -31,11 +31,12 @@ window.geometry('1024x768')
 # някакъв лейбъл
 label1 = tk.Label(
     text="EURO",
-    fg="blue",
+    fg="midnight blue",
     bg="yellow",
-    width=14,
+    width=10,
     height=2,
-	font = 'Verdana 55 bold italic'
+	font = 'Verdana 45 bold italic',
+    anchor = 'e'
 )
 
 
@@ -43,35 +44,46 @@ label2 = tk.Label(
     text="BEAT",
     fg="red",
     bg="yellow",
-    width=14,
+    width=10,
     height=2,
-	font = 'Verdana 55 bold italic'
+	font = 'Verdana 45 bold italic',
+    anchor = 'w'
 )
 
-
-
-label2.place(x=512, y=1)
-label1.place(x=1, y=1)
-
-# бутон
-button = tk.Button(
-    text="Click me!",
-    width=25,
-    height=5,
-    bg="blue",
-    fg="yellow",
+search_label = tk.Label(
+    text="Search for a song, artist, year or label",
+    fg="black",
+    bg="yellow",
+    width=40,
+    height=1,
+	font = 'Verdana 10 bold',
+    anchor = 'c'
 )
-button.pack()
-button.bind('<Button-1>', click)
 
-button=tk.Button(window, text="pythonlake.com", command=url)
-button.pack()
+label2.place(x=513, y=1)
+label1.place(x=90, y=1)
+search_label.place(x=318, y=140)
 
-entry = tk.Entry(fg="yellow", bg="green", width=50)
+# # бутон
+# button = tk.Button(
+#     text="Click me!",
+#     width=25,
+#     height=5,
+#     bg="blue",
+#     fg="yellow",
+# )
+# button.pack()
+# button.bind('<Button-1>', click)
+#
+# button=tk.Button(window, text="pythonlake.com", command=url)
+# button.pack()
+#
+entry = tk.Entry(fg="black", bg="lawn green", width=50, text='Search for a song, artist, year or label')
 # Retrieving text with .get()
 # Deleting text with .delete()
 # Inserting text with .insert()
-entry.pack()
+entry.place(x=350, y=170)
 entry.bind('<Return>', search)
 
+window.configure(background='yellow')
 window.mainloop()
