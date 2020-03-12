@@ -1,12 +1,14 @@
 # https://realpython.com/python-gui-tkinter/
 # https://www.tutorialspoint.com/python/python_gui_programming.htm
 # https://www.geeksforgeeks.org/python-gui-tkinter/
+# https://likegeeks.com/python-gui-examples-tkinter-tutorial/
 
 import tkinter as tk
 
 
 def search(entry):
-	print(entry.widget.get())
+	search_field = entry.widget.get()
+	print(search_field)
 
 def click(_):
 	print('Click')
@@ -43,11 +45,7 @@ entry = tk.Entry(fg="yellow", bg="green", width=50)
 # Deleting text with .delete()
 # Inserting text with .insert()
 entry.pack()
-
-
-
-
-
+entry.bind('<Return>', search)
 
 window.mainloop()
 
