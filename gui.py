@@ -2,6 +2,12 @@
 # https://www.tutorialspoint.com/python/python_gui_programming.htm
 # https://www.geeksforgeeks.org/python-gui-tkinter/
 # https://likegeeks.com/python-gui-examples-tkinter-tutorial/
+# https://www.tutorialsteacher.com/python/create-ui-using-tkinter-in-python
+# https://github.com/CSSE120StartingCode/TkinterPractice/tree/master/more_examples
+# http://www.pythonlake.com/tkintertkgeometry
+# https://www.python-course.eu/tkinter_layout_management.php
+# https://www.geeksforgeeks.org/python-geometry-method-in-tkinter/
+# https://likegeeks.com/python-gui-examples-tkinter-tutorial/
 
 import tkinter as tk
 
@@ -13,19 +19,34 @@ def search(entry):
 def click(_):
 	print('Click')
 
+
 # създавам прозорец
 window = tk.Tk()
+window.geometry('1024x768')
 
 
 # някакъв лейбъл
-label = tk.Label(
-    text="Hello, Tkinter",
-    fg="white",
-    bg="black",
+label1 = tk.Label(
+    text="EURO",
+    fg="blue",
+    bg="yellow",
     width=10,
-    height=10
+    height=2,
+	font = 'Verdana 40 bold italic'
 )
-label.pack()
+
+label2 = tk.Label(
+    text="BEAT",
+    fg="blue",
+    bg="yellow",
+    width=10,
+    height=2,
+	font = 'Verdana 40 bold italic'
+)
+
+
+label1.place(x=1, y=1)
+label2.place(x=600, y=1)
 
 
 # бутон
