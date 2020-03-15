@@ -9,81 +9,106 @@
 # https://www.geeksforgeeks.org/python-geometry-method-in-tkinter/
 # https://likegeeks.com/python-gui-examples-tkinter-tutorial/
 
+
 import tkinter as tk
-import webbrowser
+import search_for_song
+
+
+def find_songs(entry):
+    search_field = entry
+
+    def callback(selection):
+        a = selection
+        song_list.destroy()
+        print(a)
+
+    var = tk.StringVar()
+    song_list = tk.OptionMenu(window, var, *search_for_song.show_info(search_field), command=callback)
+    song_list.pack()
+    song_list.place(x=325, y=220)
+    var.set('Please select the song you are looking for from the list below:')
+
 
 
 def search(entry):
     search_field = entry.widget.get()
-    print(search_field)
+    find_songs(search_field)
+
+
 
 def click(_):
-    print('Click')
+    search_field = entry.get()
+    find_songs(search_field)
 
-def url():
-    url=webbrowser.open_new("www.pythonlake.com")
+
 
 # създавам прозорец
 window = tk.Tk()
+window.winfo_toplevel().title('Eurobeat program')
 window.geometry('1024x768')
+window.resizable(False, False)
 
 
 # някакъв лейбъл
 label1 = tk.Label(
     text="EURO",
     fg="midnight blue",
-    bg="yellow",
+    bg="chartreuse3",
     width=10,
     height=2,
-	font = 'Verdana 45 bold italic',
-    anchor = 'e'
+    font='Verdana 45 bold italic',
+    anchor='e'
 )
 
 
 label2 = tk.Label(
     text="BEAT",
     fg="red",
-    bg="yellow",
+    bg="chartreuse3",
     width=10,
     height=2,
-	font = 'Verdana 45 bold italic',
-    anchor = 'w'
+    font='Verdana 45 bold italic',
+    anchor='w'
 )
 
 search_label = tk.Label(
     text="Search for a song, artist, year or label",
     fg="black",
-    bg="yellow",
+    bg="chartreuse3",
     width=40,
     height=1,
-	font = 'Verdana 10 bold',
-    anchor = 'c'
+    font='Verdana 10 bold',
+    anchor='c'
 )
+
+
 
 label2.place(x=513, y=1)
 label1.place(x=90, y=1)
-search_label.place(x=318, y=140)
+search_label.place(x=320, y=135)
 
-# # бутон
-# button = tk.Button(
-#     text="Click me!",
-#     width=25,
-#     height=5,
-#     bg="blue",
-#     fg="yellow",
-# )
-# button.pack()
-# button.bind('<Button-1>', click)
+
 #
-# button=tk.Button(window, text="pythonlake.com", command=url)
-# button.pack()
-#
-entry = tk.Entry(fg="black", bg="lawn green", width=50, text='Search for a song, artist, year or label')
-# Retrieving text with .get()
-# Deleting text with .delete()
-# Inserting text with .insert()
-entry.place(x=350, y=170)
+entry = tk.Entry(fg="black", bg="white", width=50, text='Search for a song, artist, year or label')
+entry.place(x=325, y=170)
 entry.bind('<Return>', search)
 
-window.configure(background='yellow')
+
+# бутон
+button = tk.Button(
+    text="Search",
+    width=6,
+    height=1,
+    bg="dodger blue",
+    fg="black",
+    font='Verdana 8 bold italic',
+)
+button.place(x=635, y=167)
+button.bind('<Button-1>', click)
+
+
+
+
+window.configure(background='chartreuse3')
+
 window.mainloop()
