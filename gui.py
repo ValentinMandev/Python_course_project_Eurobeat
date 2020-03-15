@@ -102,17 +102,6 @@ def window1():
     button.bind('<Button-1>', click)
 
 
-    # бутон
-    button = tk.Button(
-        text="Search",
-        width=6,
-        height=1,
-        bg="dodger blue",
-        fg="black",
-        font='Verdana 8 bold italic',
-    )
-    button.place(x=635, y=167)
-    button.bind('<Button-1>', click)
 
     window.configure(background='chartreuse3')
 
@@ -158,20 +147,40 @@ def window2():
     label2.place(x=513, y=1)
     label1.place(x=90, y=1)
 
+
+    label2.place(x=513, y=1)
+    label1.place(x=90, y=1)
+
+
     # бутон
     button = tk.Button(
         text="Back to search screen",
-        width=40,
+        width=32,
         height=2,
         bg="LemonChiffon2",
         fg="black",
-        font='Verdana 16 bold italic',
+        font='Verdana 14 bold italic',
     )
-    button.place(x=200, y=600)
+    button.place(x=300, y=670)
     button.bind('<Button-1>', back)
 
+    song_info = search_for_song.print_song_info()
 
-    search_for_song.print_song_info()
+    print(song_info)
+
+    song_name = str(song_info[0])
+
+    sname = tk.Label(
+        text=song_name,
+        width= 150,
+        height = 2,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 13 bold underline",
+        anchor='w'
+    )
+    sname.pack()
+    sname.place(x=100, y=120)
 
     window2.configure(background='chartreuse3')
     window2.mainloop()
