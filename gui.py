@@ -12,103 +12,170 @@
 
 import tkinter as tk
 import search_for_song
+import os, sys
+
+def window1():
+    def find_songs(entry):
+        search_field = entry
+
+        def choose(_):
+            with open('chosen_song.txt', 'w') as songfile:
+                print(var.get(), file=songfile)
+                window.destroy()
+
+        var = tk.StringVar()
+
+        song_list = tk.OptionMenu(window, var, *search_for_song.show_info(search_field), command=choose)
+        song_list.pack()
+        song_list.place(x=325, y=220)
+        var.set('Please select the song you are looking for from the list below:')
 
 
-def find_songs(entry):
-    search_field = entry
-
-    def callback(selection):
-        a = selection
-        song_list.destroy()
-        print(a)
-
-    var = tk.StringVar()
-    song_list = tk.OptionMenu(window, var, *search_for_song.show_info(search_field), command=callback)
-    song_list.pack()
-    song_list.place(x=325, y=220)
-    var.set('Please select the song you are looking for from the list below:')
+    def search(entry):
+        search_field = entry.widget.get()
+        find_songs(search_field)
 
 
-
-def search(entry):
-    search_field = entry.widget.get()
-    find_songs(search_field)
-
+    def click(_):
+        search_field = entry.get()
+        find_songs(search_field)
 
 
-def click(_):
-    search_field = entry.get()
-    find_songs(search_field)
+    def close():
+        exit()
+
+    window = tk.Tk()
+    window.winfo_toplevel().title('Eurobeat program')
+    window.geometry('1024x768')
+    window.resizable(False, False)
+
+    # някакъв лейбъл
+    label1 = tk.Label(
+        text="EURO",
+        fg="midnight blue",
+        bg="chartreuse3",
+        width=10,
+        height=2,
+        font='Verdana 45 bold italic',
+        anchor='e'
+    )
+
+    label2 = tk.Label(
+        text="BEAT",
+        fg="red",
+        bg="chartreuse3",
+        width=10,
+        height=2,
+        font='Verdana 45 bold italic',
+        anchor='w'
+    )
+
+    search_label = tk.Label(
+        text="Search for a song, artist, year or label",
+        fg="black",
+        bg="chartreuse3",
+        width=40,
+        height=1,
+        font='Verdana 10 bold',
+        anchor='c'
+    )
+
+    label2.place(x=513, y=1)
+    label1.place(x=90, y=1)
+    search_label.place(x=320, y=135)
+
+    #
+    entry = tk.Entry(fg="black", bg="white", width=50, text='Search for a song, artist, year or label')
+    entry.place(x=325, y=170)
+    entry.bind('<Return>', search)
+
+    # бутон
+    button = tk.Button(
+        text="Search",
+        width=6,
+        height=1,
+        bg="dodger blue",
+        fg="black",
+        font='Verdana 8 bold italic',
+    )
+    button.place(x=635, y=167)
+    button.bind('<Button-1>', click)
 
 
+    # бутон
+    button = tk.Button(
+        text="Search",
+        width=6,
+        height=1,
+        bg="dodger blue",
+        fg="black",
+        font='Verdana 8 bold italic',
+    )
+    button.place(x=635, y=167)
+    button.bind('<Button-1>', click)
 
-# създавам прозорец
-window = tk.Tk()
-window.winfo_toplevel().title('Eurobeat program')
-window.geometry('1024x768')
-window.resizable(False, False)
+    window.configure(background='chartreuse3')
 
-
-# някакъв лейбъл
-label1 = tk.Label(
-    text="EURO",
-    fg="midnight blue",
-    bg="chartreuse3",
-    width=10,
-    height=2,
-    font='Verdana 45 bold italic',
-    anchor='e'
-)
-
-
-label2 = tk.Label(
-    text="BEAT",
-    fg="red",
-    bg="chartreuse3",
-    width=10,
-    height=2,
-    font='Verdana 45 bold italic',
-    anchor='w'
-)
-
-search_label = tk.Label(
-    text="Search for a song, artist, year or label",
-    fg="black",
-    bg="chartreuse3",
-    width=40,
-    height=1,
-    font='Verdana 10 bold',
-    anchor='c'
-)
+    window.protocol("WM_DELETE_WINDOW", close)
+    window.mainloop()
+    window2()
 
 
+def window2():
 
-label2.place(x=513, y=1)
-label1.place(x=90, y=1)
-search_label.place(x=320, y=135)
+    def back(_):
+        window2.destroy()
+        window1()
 
-
-#
-entry = tk.Entry(fg="black", bg="white", width=50, text='Search for a song, artist, year or label')
-entry.place(x=325, y=170)
-entry.bind('<Return>', search)
-
-
-# бутон
-button = tk.Button(
-    text="Search",
-    width=6,
-    height=1,
-    bg="dodger blue",
-    fg="black",
-    font='Verdana 8 bold italic',
-)
-button.place(x=635, y=167)
-button.bind('<Button-1>', click)
+    window2 = tk.Tk()
+    window2.winfo_toplevel().title('Eurobeat program')
+    window2.geometry('1024x768')
+    window2.resizable(False, False)
 
 
+    # някакъв лейбъл
+    label1 = tk.Label(
+        text="EURO",
+        fg="midnight blue",
+        bg="chartreuse3",
+        width=10,
+        height=2,
+        font='Verdana 45 bold italic',
+        anchor='e'
+    )
 
 
-window.configure(background='chartreuse3')
+    label2 = tk.Label(
+        text="BEAT",
+        fg="red",
+        bg="chartreuse3",
+        width=10,
+        height=2,
+        font='Verdana 45 bold italic',
+        anchor='w'
+    )
 
-window.mainloop()
+    label2.place(x=513, y=1)
+    label1.place(x=90, y=1)
+
+    # бутон
+    button = tk.Button(
+        text="Back to search screen",
+        width=40,
+        height=2,
+        bg="LemonChiffon2",
+        fg="black",
+        font='Verdana 16 bold italic',
+    )
+    button.place(x=200, y=600)
+    button.bind('<Button-1>', back)
+
+
+    search_for_song.print_song_info()
+
+    window2.configure(background='chartreuse3')
+    window2.mainloop()
+    exit()
+
+window1()
+
