@@ -34,7 +34,6 @@ def show_info(search_field):
 def print_song_info():
     with open('chosen_song.txt') as songfile:
         song_name = str([song for song in songfile]).replace("['", '').replace("\\n']", '').replace('["', '').replace('\\n"]', '')
-        print(song_name)
 
     song_id = int()
 
@@ -58,16 +57,16 @@ def print_song_info():
         if results['song_id'][songs] == song_id:
             sname = [None]
             sname[0] = (f"{results['artist_name'][songs]} - {results['song_name'][songs]}")
-            if results['release_year'][songs] is not None: sname.append(f"First release: {results['release_year'][songs]}")
+            if results['release_year'][songs] is not '': sname.append(f"First release: {results['release_year'][songs]}")
             else: sname.append('First release: Unknown')
             if results['label'][songs] is not None: sname.append(f"Music company: {results['label'][songs]}")
             else: sname.append('Music company: Unknown')
-            if results['producer'][songs] is not None: sname.append(f"Produced by: {results['producer'][songs]}")
+            if results['producer'][songs] is not '': sname.append(f"Produced by: {results['producer'][songs]}")
             else: sname.append('Produced by: Unknown')
-            if results['song_writer'][songs] is not None: sname.append(f"Song writer: {results['song_writer'][songs]}")
+            if results['song_writer'][songs] is not '': sname.append(f"Song writer: {results['song_writer'][songs]}")
             else: sname.append('Song writer: Unknown')
             sname.append(f"YouTube search link: {results['youtube_search_link'][songs]}")
-            if results['duration'][songs] is not None: sname.append(f"Song duration: {results['duration'][songs]}")
+            if results['duration'][songs] is not '': sname.append(f"Song duration: {results['duration'][songs]}")
             else: sname.append('Song duration: Unknown')
             if song_id < 100000: sname.append(f"Lyrics:\n{txt[end_title_index:]}")
             else: sname.append('Lyrics not available')

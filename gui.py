@@ -127,7 +127,7 @@ def window2():
         text="EURO",
         fg="midnight blue",
         bg="chartreuse3",
-        width=10,
+        width=8,
         height=2,
         font='Verdana 45 bold italic',
         anchor='e'
@@ -138,18 +138,16 @@ def window2():
         text="BEAT",
         fg="red",
         bg="chartreuse3",
-        width=10,
+        width=8,
         height=2,
         font='Verdana 45 bold italic',
         anchor='w'
     )
 
-    label2.place(x=513, y=1)
-    label1.place(x=90, y=1)
+    label2.place(x=353, y=1)
+    label1.place(x=10, y=1)
 
 
-    label2.place(x=513, y=1)
-    label1.place(x=90, y=1)
 
 
     # бутон
@@ -161,7 +159,7 @@ def window2():
         fg="black",
         font='Verdana 14 bold italic',
     )
-    button.place(x=300, y=670)
+    button.place(x=120, y=670)
     button.bind('<Button-1>', back)
 
     song_info = search_for_song.print_song_info()
@@ -169,18 +167,32 @@ def window2():
     print(song_info)
 
     song_name = str(song_info[0])
+    song_lyrics = str(song_info[7])
 
     sname = tk.Label(
         text=song_name,
-        width= 150,
+        width= 40,
         height = 2,
         bg="chartreuse3",
         fg="black",
         font="Verdana 13 bold underline",
-        anchor='w'
+        wraplength=400,
+        anchor='c'
     )
     sname.pack()
     sname.place(x=100, y=120)
+
+    slyrics = tk.Label(
+        text=song_lyrics,
+        width= 50,
+        height = 70,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 8 italic",
+        anchor='n'
+    )
+    slyrics.pack()
+    slyrics.place(x=660, y=20)
 
     window2.configure(background='chartreuse3')
     window2.mainloop()
