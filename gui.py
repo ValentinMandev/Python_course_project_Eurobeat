@@ -12,7 +12,8 @@
 
 import tkinter as tk
 import search_for_song
-import os, sys
+import webbrowser
+
 
 def window1():
     def find_songs(entry):
@@ -116,6 +117,9 @@ def window2():
         window2.destroy()
         window1()
 
+    def youtube(url):
+        webbrowser.open_new(url)
+
     window2 = tk.Tk()
     window2.winfo_toplevel().title('Eurobeat program')
     window2.geometry('1024x768')
@@ -159,7 +163,7 @@ def window2():
         fg="black",
         font='Verdana 14 bold italic',
     )
-    button.place(x=120, y=670)
+    button.place(x=125, y=650)
     button.bind('<Button-1>', back)
 
     song_info = search_for_song.print_song_info()
@@ -167,7 +171,18 @@ def window2():
     print(song_info)
 
     song_name = str(song_info[0])
+    song_year = str(song_info[1])
+    song_label = str(song_info[2])
+    song_producer = str(song_info[3])
+    song_writer = str(song_info[4])
+    song_link = str(song_info[5])
+    song_duration_m = str(song_info[6].split(':')[2]) if song_info[6] != 'Song duration: Unknown' else ''
+    song_duration_s = str(song_info[6].split(':')[3]) if song_info[6] != 'Song duration: Unknown' else ''
     song_lyrics = str(song_info[7])
+    # youtube_logo = tk.PhotoImage(file = 'youtube_logo.png')
+    # yphoto = tk.Label(window2, compound = tk.CENTER, image = youtube_logo, bg = 'chartreuse3')
+    # yphoto.pack()
+    # yphoto.place(x=400, y=400)
 
     sname = tk.Label(
         text=song_name,
@@ -180,7 +195,85 @@ def window2():
         anchor='c'
     )
     sname.pack()
-    sname.place(x=100, y=120)
+    sname.place(x=100, y=160)
+
+    syear = tk.Label(
+        text=song_year,
+        width= 20,
+        height = 2,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 10 bold",
+        anchor='c'
+    )
+    syear.pack()
+    syear.place(x=250, y=225)
+
+
+    slabel = tk.Label(
+        text=song_label,
+        width= 30,
+        height = 2,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 10 bold",
+        anchor='c'
+    )
+    slabel.pack()
+    slabel.place(x=200, y=280)
+
+
+    sproducer = tk.Label(
+        text=song_producer,
+        width= 40,
+        height = 2,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 10 bold",
+        anchor='c'
+    )
+    sproducer.pack()
+    sproducer.place(x=160, y=335)
+
+
+    swriter = tk.Label(
+        text=song_writer,
+        width= 40,
+        height = 2,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 10 bold",
+        anchor='c'
+    )
+    swriter.pack()
+    swriter.place(x=160, y=390)
+
+
+    sduration = tk.Label(
+        text='Song duration: ' + song_duration_m + ':' + song_duration_s if song_info[6] != 'Song duration: Unknown' else 'Song duration: Unknown',
+        width= 40,
+        height = 2,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 10 bold",
+        anchor='c'
+    )
+    sduration.pack()
+    sduration.place(x=160, y=445)
+
+    slink = tk.Label(
+        text='YouTube search link',
+        width= 20,
+        height = 4,
+        bg="chartreuse3",
+        fg="blue",
+        font="Verdana 12 bold",
+        anchor='c',
+        cursor="hand2"
+    )
+    slink.pack()
+    slink.place(x=228, y=500)
+    slink.bind("<Button-1>", lambda e: youtube(song_link))
 
     slyrics = tk.Label(
         text=song_lyrics,
@@ -192,7 +285,7 @@ def window2():
         anchor='n'
     )
     slyrics.pack()
-    slyrics.place(x=660, y=20)
+    slyrics.place(x=640, y=20)
 
     window2.configure(background='chartreuse3')
     window2.mainloop()

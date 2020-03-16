@@ -17,7 +17,9 @@ def show_info(search_field):
     c = 1
     for songs in range(len(results['song_name'])):
         s = re.compile(search_field, re.I)
-        if s.search(results['song_name'][songs]) or s.search(results['artist_name'][songs]) or s.search(str(results['release_year'][songs])) or s.search(results['label'][songs]) or s.search(results['artist_name'][songs] + ' ' + results['song_name'][songs]) or s.search(results['artist_name'][songs] + ' - ' + results['song_name'][songs]):
+        if s.search(results['song_name'][songs]) or s.search(results['artist_name'][songs]) or s.search(str(results['release_year'][songs])) \
+                or s.search(results['label'][songs]) or s.search(results['artist_name'][songs] + ' ' + results['song_name'][songs]) \
+                or s.search(results['artist_name'][songs] + ' - ' + results['song_name'][songs]):
             s_songs[c] = (results['artist_name'][songs] + ' - ' + results['song_name'][songs], results['song_id'][songs])
             c += 1
 
@@ -46,7 +48,8 @@ def print_song_info():
             lyrics_page = urllib.request.urlopen(f'https://www.eurobeat-prime.com/lyrics.php?lyrics={song_id}')
             soup = BeautifulSoup(lyrics_page, 'html.parser')
             text = soup.findAll("div", class_="mmids")
-        txt = str(text).replace('</a><br/>', '').replace('&amp;', '&').replace('<b>#:</b><p align="left">', '').replace('[<div class="mmids">\n', '').replace('</div>]', '').replace('<br/>', '')
+        txt = str(text).replace('</a><br/>', '').replace('&amp;', '&').replace('<b>#:</b><p align="left">', '')\
+            .replace('[<div class="mmids">\n', '').replace('</div>]', '').replace('<br/>', '')
 
         with open('updated_lyrics_file.txt', 'w') as outfile:
             end_title_index = txt.index('>Search database') + len('>Search database')
@@ -65,9 +68,10 @@ def print_song_info():
             else: sname.append('Produced by: Unknown')
             if results['song_writer'][songs] is not '': sname.append(f"Song writer: {results['song_writer'][songs]}")
             else: sname.append('Song writer: Unknown')
-            sname.append(f"YouTube search link: {results['youtube_search_link'][songs]}")
+            sname.append(f"{results['youtube_search_link'][songs]}")
             if results['duration'][songs] is not '': sname.append(f"Song duration: {results['duration'][songs]}")
             else: sname.append('Song duration: Unknown')
             if song_id < 100000: sname.append(f"Lyrics:\n{txt[end_title_index:]}")
             else: sname.append('Lyrics not available')
             return sname
+
