@@ -13,6 +13,7 @@
 import tkinter as tk
 import search_for_song
 import webbrowser
+import os
 
 
 def window1():
@@ -42,8 +43,19 @@ def window1():
         find_songs(search_field)
 
 
+    def upddb(_):
+
+        os.system('update_songs_database.py')
+        updms = tk.Message(window,
+            text='Database updated successfully. Please restart the application, so changes could take effect and you have the most up-to-date eurobeat information. :)',
+            font='verdana 13 bold')
+        updms.pack()
+        updms.place(x=400, y=300)
+
+
     def close():
         exit()
+
 
     window = tk.Tk()
     window.winfo_toplevel().title('Eurobeat program')
@@ -91,7 +103,7 @@ def window1():
     entry.bind('<Return>', search)
 
     # бутон
-    button = tk.Button(
+    search = tk.Button(
         text="Search",
         width=6,
         height=1,
@@ -99,10 +111,48 @@ def window1():
         fg="black",
         font='Verdana 8 bold italic',
     )
-    button.place(x=635, y=167)
-    button.bind('<Button-1>', click)
+    search.place(x=635, y=167)
+    search.bind('<Button-1>', click)
 
 
+    # бутон
+    update = tk.Button(
+        text="Update database",
+        width=14,
+        height=4,
+        bg="LemonChiffon2",
+        fg="black",
+        font='Verdana 12 bold italic',
+    )
+    update.place(x=85, y=660)
+    update.bind('<Button-1>', upddb)
+
+
+    updinfo = tk.Label(
+        text="<= Database update takes about 2-3 minutes, so please be patient - it's worth it. You don't need to do it too often though.",
+        width= 65,
+        height = 4,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 13 bold underline",
+        wraplength=600,
+        anchor='c'
+    )
+    updinfo.pack()
+    updinfo.place(x=250, y=660)
+
+
+    contacts = tk.Label(
+        text="Contacts:\nValentin Mandev\nemail: valentin.vkm@gmail.com\nNet IT project",
+        width= 30,
+        height = 4,
+        bg="chartreuse3",
+        fg="black",
+        font="Verdana 10 bold",
+        anchor='c'
+    )
+    contacts.pack()
+    contacts.place(x=740, y=50)
 
     window.configure(background='chartreuse3')
 
@@ -168,7 +218,6 @@ def window2():
 
     song_info = search_for_song.print_song_info()
 
-    print(song_info)
 
     song_name = str(song_info[0])
     song_year = str(song_info[1])

@@ -3,7 +3,11 @@ import sqlite3
 import re
 from bs4 import BeautifulSoup
 import urllib.request
+import os
 
+if os.path.exists('database.db'):
+    os.remove('all_songs.db')
+    os.rename(r'database.db', r'all_songs.db')
 
 connector = sqlite3.connect('all_songs.db')
 query = connector.execute('SELECT * from all_songs')

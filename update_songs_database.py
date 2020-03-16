@@ -41,7 +41,7 @@ artist_song_list += information_from_excel_file
 for songs in range(len(artist_song_list)):
     del artist_song_list[songs][0]
 
-database = 'all_songs.db'
+database = 'database.db'
 
 
 
