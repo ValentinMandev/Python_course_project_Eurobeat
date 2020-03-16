@@ -7,7 +7,7 @@ import os
 s = list()
 for l in range(len(artist_song_list)):
     for m in range(len(information_from_excel_file)):
-        if artist_song_list[l][0] == information_from_excel_file[m][0]:
+        if str(artist_song_list[l][0]).lower() == str(information_from_excel_file[m][0]).lower():
             artist_song_list[l].append(information_from_excel_file[m][3])
             artist_song_list[l].append(information_from_excel_file[m][4])
             artist_song_list[l].append(information_from_excel_file[m][5])
