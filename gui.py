@@ -29,7 +29,7 @@ def window1():
 
         song_list = tk.OptionMenu(window, var, *search_for_song.show_info(search_field), command=choose)
         song_list.pack()
-        song_list.place(x=325, y=220)
+        song_list.place(x=325, y=250)
         var.set('Please select the song you are looking for from the list below:')
 
 
@@ -58,7 +58,7 @@ def window1():
 
 
     window = tk.Tk()
-    window.winfo_toplevel().title('Eurobeat program')
+    window.winfo_toplevel().title('Eurobeat song guide')
     window.geometry('1024x768')
     window.resizable(False, False)
 
@@ -83,6 +83,16 @@ def window1():
         anchor='w'
     )
 
+    label3 = tk.Label(
+        text="song guide",
+        fg="midnight blue",
+        bg="chartreuse3",
+        width=20,
+        height=1,
+        font='Verdana 24 bold italic',
+        anchor='w'
+    )
+
     search_label = tk.Label(
         text="Search for a song, artist, year or label",
         fg="black",
@@ -95,11 +105,13 @@ def window1():
 
     label2.place(x=513, y=1)
     label1.place(x=90, y=1)
-    search_label.place(x=320, y=135)
+    label3.place(x=480, y=105)
+
+    search_label.place(x=320, y=175)
 
     #
     entry = tk.Entry(fg="black", bg="white", width=50, text='Search for a song, artist, year or label')
-    entry.place(x=325, y=170)
+    entry.place(x=325, y=210)
     entry.bind('<Return>', search)
 
     # бутон
@@ -111,7 +123,7 @@ def window1():
         fg="black",
         font='Verdana 8 bold italic',
     )
-    search.place(x=635, y=167)
+    search.place(x=635, y=207)
     search.bind('<Button-1>', click)
 
 
@@ -198,8 +210,21 @@ def window2():
         anchor='w'
     )
 
+
+    label3 = tk.Label(
+        text="song guide",
+        fg="midnight blue",
+        bg="chartreuse3",
+        width=20,
+        height=1,
+        font='Verdana 24 bold italic',
+        anchor='w'
+    )
+
+
     label2.place(x=353, y=1)
     label1.place(x=10, y=1)
+    label3.place(x=320, y=108)
 
 
 
