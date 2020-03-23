@@ -4,6 +4,7 @@ import re
 from bs4 import BeautifulSoup
 import urllib.request
 import os
+import random
 
 if os.path.exists('database.db'):
     os.remove('all_songs.db')
@@ -64,18 +65,40 @@ def print_song_info():
         if results['song_id'][songs] == song_id:
             sname = [None]
             sname[0] = (f"{results['artist_name'][songs]} - {results['song_name'][songs]}")
-            if results['release_year'][songs] is not '': sname.append(f"First release: {results['release_year'][songs]}")
+            if results['release_year'][songs] is not None: sname.append(f"First release: {results['release_year'][songs]}")
             else: sname.append('First release: Unknown')
             if results['label'][songs] is not None: sname.append(f"Music company: {results['label'][songs]}")
             else: sname.append('Music company: Unknown')
-            if results['producer'][songs] is not '': sname.append(f"Produced by: {results['producer'][songs]}")
+            if results['producer'][songs] is not None: sname.append(f"Produced by: {results['producer'][songs]}")
             else: sname.append('Produced by: Unknown')
-            if results['song_writer'][songs] is not '': sname.append(f"Song writer: {results['song_writer'][songs]}")
+            if results['song_writer'][songs] is not None: sname.append(f"Song writer: {results['song_writer'][songs]}")
             else: sname.append('Song writer: Unknown')
             sname.append(f"{results['youtube_search_link'][songs]}")
-            if results['duration'][songs] is not '': sname.append(f"Song duration: {results['duration'][songs]}")
+            if results['duration'][songs] is not None: sname.append(f"Song duration: {results['duration'][songs]}")
             else: sname.append('Song duration: Unknown')
             if song_id < 100000: sname.append(f"Lyrics:\n{txt[end_title_index:]}")
             else: sname.append('Lyrics not available')
             return sname
+
+
+def random_items():
+    randoms = list()
+
+    list_for_random_artist = []
+    [list_for_random_artist.append(results['artist_name'][res]) for res in range(len(results))]
+    list_for_random_artist = list(set(list_for_random_artist))
+    randoms.append(random.choice(list_for_random_artist))
+
+    list_for_random_year = []
+    [list_for_random_year.append(results['release_year'][res]) for res in range(len(results)) if results['release_year'][res] != '' and results['release_year'][res] != None \
+    and results['release_year'][res] != 'Year' and results['release_year'][res] != 'Unreleased' and results['release_year'][res] != 'Unreleased?']
+    list_for_random_year = list(set(list_for_random_year))
+    randoms.append(random.choice(list_for_random_year))
+
+    list_for_random_label = []
+    [list_for_random_label.append(results['label'][res]) for res in range(len(results)) if results['label'][res] != '' and results['label'][res] != None]
+    list_for_random_label = list(set(list_for_random_label))
+    randoms.append(random.choice(list_for_random_label))
+
+    return randoms
 

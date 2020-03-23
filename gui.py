@@ -141,7 +141,7 @@ def window1():
 
 
     updinfo = tk.Label(
-        text="<= Database update takes about 2-3 minutes, so please be patient - it's worth it. You don't need to do it too often though.",
+        text="<= Database update takes about 2-3 minutes, so please be patient - it's worth it. You don't need to do it too often.",
         width= 65,
         height = 4,
         bg="chartreuse3",
