@@ -358,8 +358,8 @@ def window2():
     song_producer = str(song_info[3])
     song_writer = str(song_info[4])
     song_link = str(song_info[5])
-    song_duration_m = str(song_info[6].split(':')[2]) if song_info[6] else ''
-    song_duration_s = str(song_info[6].split(':')[3]) if song_info[6] else ''
+    song_duration_m = str(song_info[6].split(':')[2]) if song_info[6] != 'Song duration: Unknown' else ''
+    song_duration_s = str(song_info[6].split(':')[3]) if song_info[6] != 'Song duration: Unknown'  else ''
     song_lyrics = str(song_info[7])
     # youtube_logo = tk.PhotoImage(file = 'youtube_logo.png')
     # yphoto = tk.Label(window2, compound = tk.CENTER, image = youtube_logo, bg = 'chartreuse3')
