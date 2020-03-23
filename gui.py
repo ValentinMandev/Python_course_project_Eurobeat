@@ -14,11 +14,13 @@ import tkinter as tk
 import search_for_song
 import webbrowser
 import os
+import datetime as dt
+import time
 
 
 def window1():
     def find_songs(entry):
-        search_field = entry
+        search_field = str(entry)
 
         def choose(_):
             with open('chosen_song.txt', 'w') as songfile:
@@ -29,7 +31,7 @@ def window1():
 
         song_list = tk.OptionMenu(window, var, *search_for_song.show_info(search_field), command=choose)
         song_list.pack()
-        song_list.place(x=325, y=250)
+        song_list.place(x=325, y=255)
         var.set('Please select the song you are looking for from the list below:')
 
 
@@ -43,6 +45,51 @@ def window1():
         find_songs(search_field)
 
 
+    def select_random_artist(_):
+        rand1 = search_for_song.random_items()[0]
+        update = tk.Button(
+            text=f"Random artist: {rand1}",
+            width=80,
+            height=3,
+            bg="red",
+            fg="midnight blue",
+            font='Verdana 12 bold italic',
+        )
+        update.place(x=65, y=320)
+        update.bind('<Button-1>', select_random_artist)
+        find_songs(rand1)
+
+
+    def select_random_year(_):
+        rand2 = search_for_song.random_items()[1]
+        update = tk.Button(
+            text=f"Random year: {rand2}",
+            width=80,
+            height=3,
+            bg="midnight blue",
+            fg="red",
+            font='Verdana 12 bold italic',
+        )
+        update.place(x=65, y=420)
+        update.bind('<Button-1>', select_random_year)
+        find_songs(rand2)
+
+
+    def select_random_label(_):
+        rand3 = search_for_song.random_items()[2]
+        update = tk.Button(
+            text=f"Random label: {rand3}",
+            width=80,
+            height=3,
+            bg="red",
+            fg="midnight blue",
+            font='Verdana 12 bold italic',
+        )
+        update.place(x=65, y=520)
+        update.bind('<Button-1>', select_random_label)
+        find_songs(rand3)
+
+
     def upddb(_):
 
         os.system('update_songs_database.py')
@@ -51,6 +98,18 @@ def window1():
             font='verdana 13 bold')
         updms.pack()
         updms.place(x=400, y=300)
+
+
+    def clock_update():
+        time1 = time.strftime('%H:%M:%S')
+        clock.config(text=time1)
+        clock.after(200, clock_update)
+
+
+    def date_update():
+        date1 = f'{dt.datetime.now():%d %b %Y (%a)}'
+        date.config(text=date1)
+        date.after(1000, date_update)
 
 
     def close():
@@ -166,11 +225,60 @@ def window1():
     contacts.pack()
     contacts.place(x=740, y=50)
 
+    # random
+    update = tk.Button(
+        text=f"Random artist",
+        width=80,
+        height=3,
+        bg="red",
+        fg="midnight blue",
+        font='Verdana 12 bold italic',
+    )
+    update.place(x=65, y=320)
+    update.bind('<Button-1>', select_random_artist)
+
+    update = tk.Button(
+        text=f"Random year",
+        width=80,
+        height=3,
+        bg="midnight blue",
+        fg="red",
+        font='Verdana 12 bold italic',
+    )
+    update.place(x=65, y=420)
+    update.bind('<Button-1>', select_random_year)
+
+    update = tk.Button(
+        text=f"Random label",
+        width=80,
+        height=3,
+        bg="red",
+        fg="midnight blue",
+        font='Verdana 12 bold italic',
+    )
+    update.place(x=65, y=520)
+    update.bind('<Button-1>', select_random_label)
+
+
+    date = tk.Label(window, fg="black", bg="chartreuse3", font=("Verdana 7 bold"))
+    clock = tk.Label(window, fg="black", bg="chartreuse3", font=("Verdana 7 bold"))
+    date.place(x=10, y=25)
+    clock.place(x=10, y=10)
+    clock_update()
+    date_update()
+
     window.configure(background='chartreuse3')
 
     window.protocol("WM_DELETE_WINDOW", close)
     window.mainloop()
     window2()
+
+
+
+
+
+
+
 
 
 def window2():
@@ -250,8 +358,8 @@ def window2():
     song_producer = str(song_info[3])
     song_writer = str(song_info[4])
     song_link = str(song_info[5])
-    song_duration_m = str(song_info[6].split(':')[2]) if song_info[6] != 'Song duration: Unknown' else ''
-    song_duration_s = str(song_info[6].split(':')[3]) if song_info[6] != 'Song duration: Unknown' else ''
+    song_duration_m = str(song_info[6].split(':')[2]) if song_info[6] else ''
+    song_duration_s = str(song_info[6].split(':')[3]) if song_info[6] else ''
     song_lyrics = str(song_info[7])
     # youtube_logo = tk.PhotoImage(file = 'youtube_logo.png')
     # yphoto = tk.Label(window2, compound = tk.CENTER, image = youtube_logo, bg = 'chartreuse3')
