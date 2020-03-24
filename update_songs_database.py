@@ -33,7 +33,7 @@ for songs in range(len(information_from_excel_file)):
         information_from_excel_file[songs].insert(3, '')
         information_from_excel_file[songs].insert(3, '')
         information_from_excel_file[songs].insert(1, f'{id_excel}')
-        information_from_excel_file[songs][5] = 'https://www.youtube.com/results?search_query=' + str(information_from_excel_file[songs][2]).replace(' ', '_') + '_-_' + str(information_from_excel_file[songs][3]).replace(' ', '_')
+        information_from_excel_file[songs][5] = 'https://www.youtube.com/results?search_query=' + str(information_from_excel_file[songs][2]).replace('&', 'and') + ' - ' + str(information_from_excel_file[songs][3]).replace('&', 'and')
         id_excel += 1
 
 artist_song_list += information_from_excel_file

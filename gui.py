@@ -200,7 +200,7 @@ def window1():
 
 
     updinfo = tk.Label(
-        text="<= Database update takes about 2-3 minutes, so please be patient - it's worth it. You don't need to do it too often.",
+        text="<= Database update takes about 2-3 minutes, so please be patient. You don't need to do it too often.",
         width= 65,
         height = 4,
         bg="chartreuse3",
@@ -226,7 +226,7 @@ def window1():
     contacts.place(x=740, y=50)
 
     # random
-    update = tk.Button(
+    random_artist = tk.Button(
         text=f"Random artist",
         width=80,
         height=3,
@@ -234,10 +234,10 @@ def window1():
         fg="midnight blue",
         font='Verdana 12 bold italic',
     )
-    update.place(x=65, y=320)
-    update.bind('<Button-1>', select_random_artist)
+    random_artist.place(x=65, y=320)
+    random_artist.bind('<Button-1>', select_random_artist)
 
-    update = tk.Button(
+    random_year = tk.Button(
         text=f"Random year",
         width=80,
         height=3,
@@ -245,10 +245,10 @@ def window1():
         fg="red",
         font='Verdana 12 bold italic',
     )
-    update.place(x=65, y=420)
-    update.bind('<Button-1>', select_random_year)
+    random_year.place(x=65, y=420)
+    random_year.bind('<Button-1>', select_random_year)
 
-    update = tk.Button(
+    random_label = tk.Button(
         text=f"Random label",
         width=80,
         height=3,
@@ -256,8 +256,9 @@ def window1():
         fg="midnight blue",
         font='Verdana 12 bold italic',
     )
-    update.place(x=65, y=520)
-    update.bind('<Button-1>', select_random_label)
+    random_label.place(x=65, y=520)
+    random_label.bind('<Button-1>', select_random_label)
+
 
 
     date = tk.Label(window, fg="black", bg="chartreuse3", font=("Verdana 7 bold"))
@@ -359,7 +360,7 @@ def window2():
     song_writer = str(song_info[4])
     song_link = str(song_info[5])
     song_duration_m = str(song_info[6].split(':')[2]) if song_info[6] != 'Song duration: Unknown' else ''
-    song_duration_s = str(song_info[6].split(':')[3]) if song_info[6] != 'Song duration: Unknown'  else ''
+    song_duration_s = str(song_info[6].split(':')[3]) if song_info[6] != 'Song duration: Unknown' else ''
     song_lyrics = str(song_info[7])
     # youtube_logo = tk.PhotoImage(file = 'youtube_logo.png')
     # yphoto = tk.Label(window2, compound = tk.CENTER, image = youtube_logo, bg = 'chartreuse3')
