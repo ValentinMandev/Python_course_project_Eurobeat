@@ -6,18 +6,23 @@ import urllib.request
 import os
 import random
 
-if os.path.exists('database.db'):
-    os.remove('all_songs.db')
-    os.rename(r'database.db', r'all_songs.db')
 
-connector = sqlite3.connect('all_songs.db')
-query = connector.execute('SELECT * from all_songs')
+def load_database():
+    if os.path.exists('database.db'):
+        os.remove('all_songs.db')
+        os.rename(r'database.db', r'all_songs.db')
 
-cols = [column[0] for column in query.description]
-results = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
+    connector = sqlite3.connect('all_songs.db')
+    query = connector.execute('SELECT * from all_songs')
+
+    cols = [column[0] for column in query.description]
+    results = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
+    return results
+
 
 
 def show_info(search_field):
+    results = load_database()
     s_songs = dict()
     c = 1
     for songs in range(len(results['song_name'])):
@@ -39,6 +44,7 @@ def show_info(search_field):
 
 
 def print_song_info():
+    results = load_database()
     with open('chosen_song.txt') as songfile:
         song_name = str([song for song in songfile]).replace("['", '').replace("\\n']", '').replace('["', '').replace('\\n"]', '')
 
@@ -82,6 +88,7 @@ def print_song_info():
 
 
 def random_items():
+    results = load_database()
     randoms = list()
 
     list_for_random_artist = []

@@ -16,6 +16,7 @@ import webbrowser
 import os
 import datetime as dt
 import time
+from pathlib import Path
 
 
 def window1():
@@ -91,7 +92,6 @@ def window1():
 
 
     def upddb(_):
-
         os.system('update_songs_database.py')
         updms = tk.Message(window,
             text='Database updated successfully. Please restart the application, so changes could take effect and you have the most up-to-date eurobeat information. :)',

@@ -40,7 +40,7 @@ with open('all_songs.txt') as input_file:
                 artist_song_list_raw[line_number].append(artist_name)
                 artist_song_list_raw[line_number].append(song_name)
                 artist_song_list_raw[line_number].append(lyrics_link)
-                artist_song_list_raw[line_number].append('https://www.youtube.com/results?search_query=' + artist_name.replace(' ', '+') + '+-+' + song_name.replace(' ', '+'))
+                artist_song_list_raw[line_number].append('https://www.youtube.com/results?search_query=' + artist_name.replace(' ', '+').replace('&', 'and') + '+-+' + song_name.replace(' ', '+').replace('&', 'and'))
                 line_number += 1
 
 
@@ -49,13 +49,6 @@ artist_song_list = list()
 for lst in range(len(artist_song_list_raw)):
     if len(artist_song_list_raw[lst]) > 0:
         artist_song_list.append(artist_song_list_raw[lst])
-
-
-# # Записвам си един файл с всички песни.
-# with open('songs_available.txt', 'w') as output_file:
-#     for songs in range(len(artist_song_list)):
-#         if artist_song_list[songs]:
-#             print(artist_song_list[songs][1] + ': ' + str(artist_song_list[songs][0]).replace(':', '-'), file=output_file)
 
 
 # Изтривам ненужния all_songs.txt
