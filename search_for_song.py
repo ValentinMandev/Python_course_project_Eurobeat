@@ -55,16 +55,12 @@ def print_song_info():
             song_id = results['song_id'][songs]
 
     if 0 < song_id:
-        with open('temporary_lyrics_file.txt', 'w') as tempfile:
-            lyrics_page = urllib.request.urlopen(f'https://www.eurobeat-prime.com/lyrics.php?lyrics={song_id}')
-            soup = BeautifulSoup(lyrics_page, 'html.parser')
-            text = soup.findAll("div", class_="mmids")
+        lyrics_page = urllib.request.urlopen(f'https://www.eurobeat-prime.com/lyrics.php?lyrics={song_id}')
+        soup = BeautifulSoup(lyrics_page, 'html.parser')
+        text = soup.findAll("div", class_="mmids")
         txt = str(text).replace('</a><br/>', '').replace('&amp;', '&').replace('<b>#:</b><p align="left">', '')\
             .replace('[<div class="mmids">\n', '').replace('</div>]', '').replace('<br/>', '')
-
-        with open('updated_lyrics_file.txt', 'w') as outfile:
-            end_title_index = txt.index('>Search database') + len('>Search database')
-            print(txt[end_title_index:], file=outfile)
+        end_title_index = txt.index('>Search database') + len('>Search database')
 
 
     for songs in range(len(results['song_id'])):

@@ -10,12 +10,12 @@ workbook = openpyxl.load_workbook(filename=excel_database)
 sheets = workbook.sheetnames
 
 
-information_from_excel_file_raw = [[] for _ in range(60000)]
+information_from_excel_file_raw = [[] for _ in range(60000)] # списък от списъци, които да пълним с информацията за всяка една песен
 a = 0
 
 for sheet in sheets:
     for n in range(2, 2000):
-        if workbook[sheet][f'B{n}'].value and workbook[sheet][f'C{n}'].value and workbook[sheet][f'B{n}'].value:
+        if workbook[sheet][f'B{n}'].value and workbook[sheet][f'C{n}'].value:
             release_year = workbook[sheet][f'A{n}'].value
             artist_name = workbook[sheet][f'B{n}'].value
             song_name = workbook[sheet][f'C{n}'].value

@@ -25,7 +25,7 @@ with open('all_songs.txt', 'w') as outfile:
 # ID (което взимаме от ID-то от линка с текста на песента).
 # Пълним списък от списъци с необходимата ни информация
 artist_song_list_raw = [[] for _ in range(10000)] # тук дефинирам някаква голяма бройка списъци съдържащи се в основния списък, за да съм сигурен, че няма да ми даде out of range. Списъка на песни е повече от два пъти по-малко.
-line_number = 0 # това го ползвам, за да управлявам кой по ред списък част от основния списък да пълни
+line_number = 0
 with open('all_songs.txt') as input_file:
     for line in input_file:
         if line != '[<div class="mmids">\n' and line != '</div>]\n' and line != '</p>\n': # изключва излишни редове
