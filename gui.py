@@ -1,15 +1,3 @@
-# https://realpython.com/python-gui-tkinter/
-# https://www.tutorialspoint.com/python/python_gui_programming.htm
-# https://www.geeksforgeeks.org/python-gui-tkinter/
-# https://likegeeks.com/python-gui-examples-tkinter-tutorial/
-# https://www.tutorialsteacher.com/python/create-ui-using-tkinter-in-python
-# https://github.com/CSSE120StartingCode/TkinterPractice/tree/master/more_examples
-# http://www.pythonlake.com/tkintertkgeometry
-# https://www.python-course.eu/tkinter_layout_management.php
-# https://www.geeksforgeeks.org/python-geometry-method-in-tkinter/
-# https://likegeeks.com/python-gui-examples-tkinter-tutorial/
-
-
 import tkinter as tk
 import search_for_song
 import webbrowser
@@ -354,10 +342,7 @@ def window2():
     song_duration_m = str(song_info[6].split(':')[2]) if song_info[6] != 'Song duration: Unknown' else ''
     song_duration_s = str(song_info[6].split(':')[3]) if song_info[6] != 'Song duration: Unknown' else ''
     song_lyrics = str(song_info[7])
-    # youtube_logo = tk.PhotoImage(file = 'youtube_logo.png')
-    # yphoto = tk.Label(window2, compound = tk.CENTER, image = youtube_logo, bg = 'chartreuse3')
-    # yphoto.pack()
-    # yphoto.place(x=400, y=400)
+
 
     sname = tk.Label(
         text=song_name,
