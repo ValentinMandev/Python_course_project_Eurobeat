@@ -20,7 +20,6 @@ def load_database():
     return results
 
 
-
 def show_info(search_field):
     results = load_database()
     s_songs = dict()
@@ -62,7 +61,6 @@ def print_song_info():
             .replace('[<div class="mmids">\n', '').replace('</div>]', '').replace('<br/>', '')
         end_title_index = txt.index('>Search database') + len('>Search database')
 
-
     for songs in range(len(results['song_id'])):
         if results['song_id'][songs] == song_id:
             sname = [None]
@@ -76,7 +74,12 @@ def print_song_info():
             if results['song_writer'][songs] is not None and results['song_writer'][songs] != 'None' and results['song_writer'][songs] != '': sname.append(f"Song writer: {results['song_writer'][songs]}")
             else: sname.append('Song writer: Unknown')
             sname.append(f"{results['youtube_search_link'][songs]}")
-            if results['duration'][songs] is not None and results['duration'][songs] != 'None' and results['duration'][songs] != '': sname.append(f"Song duration: {results['duration'][songs]}")
+            if results['duration'][songs] is not '':
+                try:
+                    _ = int(results['duration'][songs][0])
+                    sname.append(f"Song duration: {results['duration'][songs]}")
+                except ValueError:
+                    sname.append('Song duration: Unknown')
             else: sname.append('Song duration: Unknown')
             if song_id < 100000: sname.append(f"Lyrics:\n{txt[end_title_index:]}")
             else: sname.append('Lyrics not available')
@@ -102,6 +105,11 @@ def random_items():
     [list_for_random_label.append(results['label'][res]) for res in range(len(results)) if results['label'][res] != '' and results['label'][res] != None]
     list_for_random_label = list(set(list_for_random_label))
     randoms.append(random.choice(list_for_random_label))
+
+    list_for_random_song = []
+    [list_for_random_song.append(f"{results['artist_name'][res]} - {results['song_name'][res]}") for res in range(len(results))]
+    list_for_random_song = list(set(list_for_random_song))
+    randoms.append(random.choice(list_for_random_song))
 
     return randoms
 

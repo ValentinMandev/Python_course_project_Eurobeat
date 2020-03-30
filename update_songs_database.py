@@ -50,11 +50,9 @@ for songs in range(len(artist_song_list)):
 database = 'database.db'
 
 
-
 # Изчиствам си старата база данни
 if os.path.exists(database):
     os.remove(database)
-
 
 
 # Създавам си новата база данни, в която включвам цялата нужна информация:
