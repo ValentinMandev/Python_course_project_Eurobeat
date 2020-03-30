@@ -21,8 +21,8 @@ class Element:
     def label(self, wraplength, anchor):
         name = tk.Label(
             text=f"{self.text}",
-            width= self.width,
-            height = self.height,
+            width=self.width,
+            height=self.height,
             bg=f"{self.bg}",
             fg=f"{self.fg}",
             font=f"{self.font}",
@@ -129,7 +129,7 @@ def window1():
         find_songs(rand3)
 
     def upddb(_):
-        os.system('update_songs_database.py')
+        os.system('python update_songs_database.py')
         updms = tk.Message(window1,
             text='Database updated successfully. Please restart the application, so changes could take effect and you have the most up-to-date eurobeat information. :)',
             font='verdana 13 bold')
